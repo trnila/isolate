@@ -679,7 +679,8 @@ box_inside(char **args)
   if (set_cwd && chdir(set_cwd))
     die("chdir: %m");
 
-  execve(args[0], args, env);
+  environ = env;
+  execvp(args[0], args);
   die("execve(\"%s\"): %m", args[0]);
 }
 
